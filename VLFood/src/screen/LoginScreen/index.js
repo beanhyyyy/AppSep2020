@@ -101,6 +101,7 @@ const style = StyleSheet.create({
     flex: 1,
     padding: 10,
     paddingVertical: 20,
+    backgroundColor: '#fff',
   },
   header: {
     fontSize: 20,
@@ -111,6 +112,7 @@ const style = StyleSheet.create({
   wrapper: {
     padding: 14,
     justifyContent: 'center',
+    backgroundColor: '#fff',
   },
   btnTextForgot: {
     fontWeight: 'bold',
