@@ -1,6 +1,5 @@
 import React from 'react';
 import {Block, Button, TextView} from '../../components';
-import HeaderTop from './HeaderTop';
 import foodapp from '../../mooks/foodapp.json';
 import {FlatList, Image, Dimensions, StyleSheet} from 'react-native';
 const PopularItems = () => {
@@ -23,7 +22,6 @@ const PopularItems = () => {
   };
   return (
     <Block padding={10} marginLeft={5}>
-      <HeaderTop title="Popular Items" moreTitle="View All" />
       <FlatList horizontal data={foodapp} renderItem={renderItem} />
     </Block>
   );

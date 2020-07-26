@@ -9,24 +9,37 @@ import {
 } from 'react-native';
 import Input from './Input';
 import Button from './Button';
-const LoginScreen = () => {
-  return (
-    <SafeAreaView style={style.container}>
-      <View style={style.wrapper}>
-        <Text style={style.header}>Sign In</Text>
-        <Input placeholder={'Email ID'} />
-        <Input placeholder={'Password'} />
-        <View style={style.forgotContainer}>
-          <TouchableOpacity style={style.btnTextForgot}>
-            <Text>Forgot Password?</Text>
+
+export default class LoginScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this._navigateTo = this._navigateTo.bind(this);
+  }
+  _navigateTo(pageName) {
+    this.props.navigation.navigate(pageName);
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={style.container}>
+        <View style={style.wrapper}>
+          <Text style={style.header}>Sign In</Text>
+          <Input placeholder={'Email ID'} />
+          <Input placeholder={'Password'} />
+          <View style={style.forgotContainer}>
+            <TouchableOpacity style={style.btnTextForgot}>
+              <Text>Forgot Password?</Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            style={style.btnLogin}
+            onPress={() => this._navigateTo('MainTab')}>
+            <Text style={[style.btnTextForgot, {color: 'white'}]}>SignIn</Text>
           </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={style.btnLogin}>
-          <Text style={[style.btnTextForgot, {color: 'white'}]}>SignIn</Text>
-        </TouchableOpacity>
-        <Text style={{textAlign: 'center', padding: 10}}>or</Text>
-        <View style={style.ggBtn}>
-          {/* <TouchableOpacity
+          <Text style={{textAlign: 'center', padding: 10}}>or</Text>
+          <View style={style.ggBtn}>
+            {/* <TouchableOpacity
             style={[
               style.btnLogin,
               {
@@ -45,19 +58,17 @@ const LoginScreen = () => {
             />
             <Text style={style.btnTextForgot}>Google</Text>
           </TouchableOpacity> */}
-          <Button
-            title="Google"
-            icon={require('../../assets/googleIcon.png')}
-            onPress
-          />
-          <Button
-            title="Facebook"
-            icon={require('../../assets/fbIcon.png')}
-            color={'#4a6ea8'}
-            textColor={'#fff'}
-            onPress
-          />
-          {/* <TouchableOpacity
+            <Button
+              title="Google"
+              icon={require('../../assets/googleIcon.png')}
+            />
+            <Button
+              title="Facebook"
+              icon={require('../../assets/fbIcon.png')}
+              color={'#4a6ea8'}
+              textColor={'#fff'}
+            />
+            {/* <TouchableOpacity
             style={[
               style.btnLogin,
               {
@@ -77,24 +88,25 @@ const LoginScreen = () => {
               Facebook
             </Text>
           </TouchableOpacity> */}
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 15,
+            }}>
+            <Text style={{marginRight: 15}}>Not yet a member,</Text>
+            <TouchableOpacity>
+              <Text style={[style.btnTextForgot, {color: 'red'}]}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            padding: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 15,
-          }}>
-          <Text style={{marginRight: 15}}>Not yet a member,</Text>
-          <TouchableOpacity>
-            <Text style={[style.btnTextForgot, {color: 'red'}]}>Sign Up</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-};
+      </SafeAreaView>
+    );
+  }
+}
 
 const style = StyleSheet.create({
   container: {
@@ -132,5 +144,3 @@ const style = StyleSheet.create({
     flexDirection: 'row',
   },
 });
-
-export default LoginScreen;

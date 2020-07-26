@@ -13,7 +13,7 @@ const Splash = () => {
   const navigation = useNavigation();
 
   const goToLogin = () => {
-    navigation.navigate('LoginScreen');
+    navigation.navigate('Login');
   };
   return <ImageBackground style={style.bg} source={SplashImage} />;
 };

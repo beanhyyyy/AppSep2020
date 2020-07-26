@@ -1,6 +1,5 @@
 import React from 'react';
 import {Block, TextView, Input, Button} from '../../components';
-import HeaderTop from './HeaderTop';
 import {FlatList} from 'react-native-gesture-handler';
 import categories from '../../mooks/categories.json';
 import {Image, Dimensions, StyleSheet} from 'react-native';
@@ -18,7 +17,6 @@ const TopCategories = () => {
   };
   return (
     <Block padding={10}>
-      <HeaderTop moreIcon="filter" title="Top Categories" moreTitle="Filter" />
       <FlatList
         horizontal
         keyExtractor={(item) => item.id}
