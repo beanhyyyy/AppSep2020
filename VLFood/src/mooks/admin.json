@@ -1,0 +1,42 @@
+[
+    {
+      "id": "1",
+      "name": "Nguyen",
+      "comment": "Viet Nam",
+      "rating": "1",
+      "image":
+        "https://raw.githubusercontent.com/kanghy123/AppSep2020/master/VLFood/src/assets/avatar1.png",
+    },
+    {
+      "id": "2",
+      "name": "Tam",
+      "comment": "Viet Nam",
+      "rating": "2",
+      "image":
+        "https://raw.githubusercontent.com/kanghy123/AppSep2020/master/VLFood/src/assets/avatar2.png",
+    },
+    {
+      "id": "3",
+      "name": "Phi",
+      "comment": "Viet Nam",
+      "rating": "1",
+      "image":
+        "https://raw.githubusercontent.com/kanghy123/AppSep2020/master/VLFood/src/assets/avatar4.png",
+    },
+    {
+      "id": "4",
+      "name": "Dinh",
+      "comment": "Viet Nam",
+      "rating": "4",
+      "image":
+        "https://raw.githubusercontent.com/kanghy123/AppSep2020/master/VLFood/src/assets/avatar3.png",
+    },
+    {
+      "id": "5",
+      "name": "Thay Quang",
+      "comment": "Viet Nam",
+      "rating": "4",
+      "image":
+        "https://raw.githubusercontent.com/kanghy123/AppSep2020/master/VLFood/src/assets/avatar1.png",
+    },
+  ]

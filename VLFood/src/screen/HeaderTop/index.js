@@ -1,6 +1,5 @@
 import React from 'react';
 import {Block, Button, TextView} from '../../components';
-import foodapp from '../../mooks/foodapp.json';
 import {
   FlatList,
   Image,

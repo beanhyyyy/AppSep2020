@@ -5,7 +5,6 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import Input from './Input';
 import Button from './Button';
