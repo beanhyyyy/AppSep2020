@@ -120,7 +120,7 @@ function MainTab() {
     </Tab.Navigator>
   );
 }
-
+//dddddd
 export default function App() {
   return (
     <NavigationContainer>
