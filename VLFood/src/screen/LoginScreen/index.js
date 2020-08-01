@@ -5,38 +5,93 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
-import Input from './Input';
 import Button from './Button';
+import * as firebase from 'firebase';
 
 export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this._navigateTo = this._navigateTo.bind(this);
+
+    this.state = {
+      email: '',
+      password: '',
+      errorMessage: null,
+    };
   }
+
   _navigateTo(pageName) {
     this.props.navigation.navigate(pageName);
   }
 
+  _handleLogin = () => {
+    const {email, password} = this.state;
+    if (this.state.email == 'admin@gmail.com') {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => this._navigateTo('MainTabAdmin'))
+        .catch((erro) => this.setState({errorMessage: erro.message}));
+    } else if (this.state.email.indexOf('partner', 0)) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => this._navigateTo('MainTabPartner'))
+        .catch((erro) => this.setState({errorMessage: erro.message}));
+    } else {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => this._navigateTo('MainTabUser'))
+        .catch((erro) => this.setState({errorMessage: erro.message}));
+    }
+  };
   render() {
     return (
       <SafeAreaView style={style.container}>
         <View style={style.wrapper}>
           <Text style={style.header}>Sign In</Text>
-          <Input placeholder={'Email ID'} />
-          <Input placeholder={'Password'} />
+          <View style={style.errorMessage}>
+            {this.state.errorMessage && (
+              <Text style={style.error}>{this.state.errorMessage}</Text>
+            )}
+          </View>
+          <View style={style.from}>
+            <View>
+              <Text style={style.inputTitle}>Email Address</Text>
+              <TextInput
+                style={style.input}
+                autoCapitalize="none"
+                onChangeText={(email) => this.setState({email})}
+                value={this.state.email}
+                placeholder={'ten.mssv@vanlanguni.vn'}
+              />
+            </View>
+            <View>
+              <Text style={style.inputTitle}>Password</Text>
+              <TextInput
+                style={style.input}
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={(password) => this.setState({password})}
+                value={this.state.password}
+                placeholder={'password'}
+              />
+            </View>
+          </View>
+
           <View style={style.forgotContainer}>
             <TouchableOpacity style={style.btnTextForgot}>
-              <Text>Forgot Password?</Text>
+              <Text style={style.inputTitle}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={style.btnLogin}
-            onPress={() => this._navigateTo('MainTab')}>
+          <TouchableOpacity style={style.btnLogin} onPress={this._handleLogin}>
             <Text style={[style.btnTextForgot, {color: 'white'}]}>SignIn</Text>
           </TouchableOpacity>
-          <Text style={{textAlign: 'center', padding: 10}}>or</Text>
+          <Text style={style.inputTitleOr}>or</Text>
           <View style={style.ggBtn}>
             {/* <TouchableOpacity
             style={[
@@ -97,7 +152,7 @@ export default class LoginScreen extends React.Component {
               marginTop: 15,
             }}>
             <Text style={{marginRight: 15}}>Not yet a member,</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this._navigateTo('SignUp')}>
               <Text style={[style.btnTextForgot, {color: 'red'}]}>Sign Up</Text>
             </TouchableOpacity>
           </View>
@@ -110,7 +165,6 @@ export default class LoginScreen extends React.Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
     paddingVertical: 20,
     backgroundColor: '#fff',
   },
@@ -118,7 +172,7 @@ const style = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 40,
+    marginBottom: 20,
   },
   wrapper: {
     padding: 14,
@@ -141,5 +195,42 @@ const style = StyleSheet.create({
   },
   ggBtn: {
     flexDirection: 'row',
+    marginLeft: 10,
+  },
+  errorMessage: {
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 30,
+  },
+  error: {
+    color: '#E9446A',
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  input: {
+    borderBottomColor: '#8A8F9E',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    height: 40,
+    fontSize: 10,
+    color: '#161F3D',
+    marginBottom: 10,
+    padding: 10,
+  },
+  inputTitle: {
+    color: '#8A8F9E',
+    fontSize: 10,
+    textTransform: 'uppercase',
+  },
+  inputTitleOr: {
+    color: '#8A8F9E',
+    fontSize: 10,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    padding: 10,
+  },
+  from: {
+    marginBottom: 40,
   },
 });

@@ -44,7 +44,7 @@ export default class ListAllScreen extends React.Component {
   renderItem = ({item}) => {
     return (
       <SafeAreaView style={{flex: 1}}>
-        <Block block color="#f5f4f4" padding={10}>
+        <Block block color="white">
           <LinearGradient
             paddingBottom={5}
             colors={['#e1dedd', 'white']}

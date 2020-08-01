@@ -19,6 +19,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Block, Button, TextView} from '../src/components';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import DetailScreen from '../src/screen/DetailScreen';
+import SignUpScreen from './screen/SignUpScreen';
+import HomeAdminScreen from './screen/AdminScreen/HomeAdminScreen';
+import AddStoresScreen from './screen/AdminScreen/AddStoresScreen';
+import DetailStoresScreen from './screen/AdminScreen/DetailStoresScreen';
+import ViewStoresScreen from './screen/AdminScreen/ViewStoresScreen';
 const Stack = createStackNavigator();
 
 function CustomTab({state, descriptors, navigation}) {
@@ -77,6 +82,10 @@ function CustomTab({state, descriptors, navigation}) {
           if (route.name == 'Contact') {
             return 'search';
           }
+
+          if (route.name == 'HomeAdmin') {
+            return 'explore';
+          }
         };
         return (
           <Button block={isFocused} onPress={onPress} onLongPress={onLongPress}>
@@ -108,7 +117,7 @@ function CustomTab({state, descriptors, navigation}) {
 
 const Tab = createBottomTabNavigator();
 
-function MainTab() {
+function MainTabUser() {
   return (
     <Tab.Navigator
       tabBarOptions={{}}
@@ -120,16 +129,57 @@ function MainTab() {
     </Tab.Navigator>
   );
 }
-//dddddd
+
+function MainTabAdmin() {
+  return (
+    <Tab.Navigator
+      tabBarOptions={{}}
+      tabBar={(props) => <CustomTab {...props} />}>
+      <Tab.Screen name="HomeAdmin" component={HomeAdminScreen} />
+      <Tab.Screen name="Contact" component={ContactScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+
+function MainTabPartner() {
+  return (
+    <Tab.Navigator
+      tabBarOptions={{}}
+      tabBar={(props) => <CustomTab {...props} />}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="ListAll" component={ListAllScreen} />
+      <Tab.Screen name="Contact" component={ContactScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={'Splash'} headerMode="none">
-        <Stack.Screen name="MainTab" options={{}} component={MainTab} />
+      <Stack.Navigator initialRouteName={'Login'} headerMode="none">
+        <Stack.Screen name="MainTabUser" options={{}} component={MainTabUser} />
+        <Stack.Screen
+          name="MainTabAdmin"
+          options={{}}
+          component={MainTabAdmin}
+        />
+        <Tab.Screen name="AddStores" component={AddStoresScreen} />
+        <Tab.Screen name="DetailStores" component={DetailStoresScreen} />
+        <Tab.Screen name="ViewStores" component={ViewStoresScreen} />
+
+        <Stack.Screen
+          name="MainTabPartner"
+          options={{}}
+          component={MainTabPartner}
+        />
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Detail" component={DetailScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
