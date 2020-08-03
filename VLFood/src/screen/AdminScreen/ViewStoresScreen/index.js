@@ -1,30 +1,259 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import HeaderTop from '../../HeaderTop';
+// import React from 'react';
+// import {View, StyleSheet} from 'react-native';
+// import HeaderTop from '../../HeaderTop';
+// export default class ViewStoresScreen extends React.Component {
+//   constructor(props) {
+//     super(props);
+
+//     this._navigateTo = this._navigateTo.bind(this);
+//   }
+//   _navigateTo(pageName) {
+//     this.props.navigation.navigate(pageName);
+//   }
+
+//   render() {
+//     return (
+//       <View style={style.container}>
+//         <HeaderTop title="View Stores" />
+//       </View>
+//     );
+//   }
+// }
+
+// var style = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: 'white',
+//     marginTop: 20,
+//     marginBottom: 5,
+//   },
+// });
+
+import {SafeAreaView} from 'react-native';
+import {Block, Button, TextView} from '../../../components';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import * as React from 'react';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import * as firebase from 'firebase';
+
+const rootRef = firebase.database().ref();
+const storesRef = rootRef.child('storesTable');
+
 export default class ViewStoresScreen extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      storesTable: [],
+      nameStore: '',
+      location: '',
+      seat: '',
+      description: '',
+      rating: '',
+      price: '',
+      catagory: '',
+      loading: false,
+    };
     this._navigateTo = this._navigateTo.bind(this);
+  }
+
+  componentDidMount() {
+    storesRef.on('value', (childSnapshot) => {
+      const storesTable = [];
+      childSnapshot.forEach((doc) => {
+        storesTable.push({
+          key: doc.key,
+          nameStore: doc.toJSON().nameStore,
+          location: doc.toJSON().location,
+          seat: doc.toJSON().seat,
+          description: doc.toJSON().description,
+          rating: doc.toJSON().rating,
+          price: doc.toJSON().price,
+        });
+        this.setState({
+          storesTable: storesTable,
+          data_temp: storesTable,
+          loading: true,
+        });
+      });
+    });
   }
   _navigateTo(pageName) {
     this.props.navigation.navigate(pageName);
   }
 
+  _Rating(item) {
+    let rating = [];
+    for (let i = 0; i < item; i++) {
+      rating.push(
+        <Image
+          source={require('../../../assets/star.png')}
+          style={{width: 15, height: 15, marginRight: 3}}
+          resizeMode="cover"
+        />,
+      );
+    }
+    return rating;
+  }
+  renderItem = ({item}) => {
+    return (
+      <SafeAreaView style={{flex: 1}}>
+        <Block block color="white">
+          <LinearGradient
+            paddingBottom={5}
+            colors={['#e1dedd', 'white']}
+            start={{x: 0, y: 1}}
+            end={{x: 1, y: 0}}
+            style={style.item}>
+            {/* <View style={style.image_container}>
+              <Image source={{uri: item.image}} style={style.image} />
+            </View> */}
+            <View style={style.content}>
+              <TextView style={style.styleName}>{item.nameStore}</TextView>
+              <TextView color="gray">By {item.location}</TextView>
+              <TextView color="gray">By {item.seat}</TextView>
+              <TextView color="gray">By {item.description}</TextView>
+              <View style={style.rating}>{this._Rating(item.rating)}</View>
+              <View style={style.price_container}>
+                <View style={style.price}>
+                  <TextView style={style.textPrice}>{item.price}</TextView>
+                </View>
+              </View>
+            </View>
+
+            <Button style={style.button}>
+              <AntDesign name="arrowright" color="white" size={20} />
+            </Button>
+          </LinearGradient>
+        </Block>
+      </SafeAreaView>
+    );
+  };
+
+  ItemSeparatorComponent = () => {
+    return <View style={{height: 10}} />;
+  };
+
+  _search(text) {
+    let storesTable = [];
+    this.state.data_temp.map(function (value) {
+      if (value.nameStore.indexOf(text) > -1) {
+        storesTable.push(value);
+      }
+    });
+    this.setState({
+      storesTable: storesTable,
+      search: text,
+    });
+  }
   render() {
     return (
       <View style={style.container}>
-        <HeaderTop title="View Stores" />
+        <View style={style.section}>
+          <TextInput
+            placeholder="Search.."
+            style={{flex: 1, marginLeft: 10}}
+            value={this.state.search}
+            onChangeText={(text) => this._search(text)}
+          />
+          <TouchableOpacity
+            onPress={() => this._search('')}
+            style={{paddingHorizontal: 10}}>
+            <MaterialIcons name="close" color="gray" size={25} />
+          </TouchableOpacity>
+        </View>
+        <View style={style.flastList}>
+          <FlatList
+            data={this.state.storesTable}
+            renderItem={this.renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={this.ItemSeparatorComponent}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
       </View>
     );
   }
 }
 
-var style = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    marginTop: 20,
-    marginBottom: 5,
+  },
+  flastList: {
+    flex: 1,
+    marginTop: 10,
+  },
+  item: {
+    flex: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    borderRadius: 10,
+  },
+  image_container: {
+    width: 90,
+    height: 90,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderWidth: 5,
+    borderColor: 'white',
+    borderRadius: 10,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  styleName: {
+    color: 'gray',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  rating: {
+    marginTop: 5,
+    flexDirection: 'row',
+  },
+  button: {
+    width: 30,
+    height: 30,
+    backgroundColor: '#e1dedd',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  price_container: {
+    flexDirection: 'row',
+    margin: 10,
+  },
+  price: {
+    backgroundColor: 'white',
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderRadius: 50,
+  },
+  textPrice: {
+    color: 'red',
+    fontWeight: 'bold',
+  },
+  section: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 100,
+    backgroundColor: '#f2f2f2',
+    marginTop: 5,
   },
 });

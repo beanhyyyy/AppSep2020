@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import HeaderTop from '../../HeaderTop';
 export default class HomeAdminScreen extends React.Component {
   constructor(props) {
@@ -15,6 +15,12 @@ export default class HomeAdminScreen extends React.Component {
     return (
       <View style={style.container}>
         <HeaderTop title="Home Admin" />
+        <TouchableOpacity onPress={() => this._navigateTo('AddStores')}>
+          <Text style={[style.btnTextForgot, {color: 'red'}]}>Add Stores</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this._navigateTo('ViewStores')}>
+          <Text style={[style.btnTextForgot, {color: 'red'}]}>Add Stores</Text>
+        </TouchableOpacity>
       </View>
     );
   }
