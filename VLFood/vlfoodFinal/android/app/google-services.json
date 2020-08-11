@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "400214112291",
+    "firebase_url": "https://vlfoodfinal.firebaseio.com",
+    "project_id": "vlfoodfinal",
+    "storage_bucket": "vlfoodfinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400214112291:android:776ee9266b8d1278939996",
+        "android_client_info": {
+          "package_name": "com.vlfoodfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400214112291-t0u484fg2nptcksojdscju0ui3f6q5il.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vlfoodfinal",
+            "certificate_hash": "0b8480528af2e8b8dc0bbd54ab7759ccebee11ae"
+          }
+        },
+        {
+          "client_id": "400214112291-04eb7oajmmpbq8qd23ec6tbanh6220ks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR405bQFy_O__mlNJUBbZwxXVezO3onmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400214112291-04eb7oajmmpbq8qd23ec6tbanh6220ks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

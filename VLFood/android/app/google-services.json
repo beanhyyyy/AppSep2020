@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "891528412755",
-    "firebase_url": "https://fir-vlfood.firebaseio.com",
-    "project_id": "fir-vlfood",
-    "storage_bucket": "fir-vlfood.appspot.com"
+    "project_number": "518864796118",
+    "firebase_url": "https://vlfood-c71ac.firebaseio.com",
+    "project_id": "vlfood-c71ac",
+    "storage_bucket": "vlfood-c71ac.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:891528412755:android:adbc56a18eacedf3b350a6",
+        "mobilesdk_app_id": "1:518864796118:android:251794e37defb239d2cc77",
         "android_client_info": {
           "package_name": "com.vlfood"
         }
       },
       "oauth_client": [
         {
-          "client_id": "891528412755-hogr8tao4b371p7rc6tq3pnkbhk4rvdn.apps.googleusercontent.com",
+          "client_id": "518864796118-kpv7vek2627p2sc0h67bn182nvv87855.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBM4H5ISugNlPmmQ_hu8rbffwnJLKkdIZE"
+          "current_key": "AIzaSyBOgW2ed0B88WISqipFWVRs7Ejha-i-Eys"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "891528412755-hogr8tao4b371p7rc6tq3pnkbhk4rvdn.apps.googleusercontent.com",
+              "client_id": "518864796118-kpv7vek2627p2sc0h67bn182nvv87855.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

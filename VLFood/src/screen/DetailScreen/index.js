@@ -1,34 +1,47 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   View,
   Text,
   ImageBackground,
   Dimensions,
-  Image,
   StyleSheet,
   StatusBar,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-export default class DetailScreen extends React.Component {
-  constructor(props) {
-    super(props);
+class DetailScreen extends Component {
+  _Rating(item) {
+    let rating = [];
+    for (let i = 0; i < item; i++) {
+      rating.push(
+        <Image
+          source={require('../../assets/star.png')}
+          style={{width: 15, height: 15, marginRight: 3}}
+          resizeMode="cover"
+        />,
+      );
+    }
+    return rating;
   }
   render() {
+    console.log(this.props);
+    const rating = this.props.route.params.item.rating;
+
     return (
       <View style={style.container}>
         <StatusBar barStyle="light-content" />
         <ImageBackground
-          source={require('../../assets/header_detail.png')}
+          source={require('../src/assets/header_detail.png')}
           style={{flex: 1, alignItems: 'center'}}
           resizeMode={'stretch'}>
           <View style={style.image_container}>
-            <Image
+            {/* <Image
               source={{uri: this.props.navigation.image}}
               style={style.image}
-            />
+            /> */}
 
             {/* <Image
               source={this.props.navigation.state.params.image}
@@ -46,13 +59,30 @@ export default class DetailScreen extends React.Component {
         </ImageBackground>
         <ScrollView style={style.footer} showsVerticalScrollIndicator={false}>
           <View style={style.status}>
-            <Text style={{color: 'red'}}>AVALIABLE</Text>
+            <Text style={{color: 'green'}}>AVALIABLE</Text>
           </View>
-          <Text style={style.textPrice}>{this.props.navigation.price}</Text>
+          <View flexDirection={'row'}>
+            <Text style={style.textPrice}>
+              {this.props.route.params.item.price}
+              {' | '}
+            </Text>
+            <Text style={style.textPrice}>
+              <Text style={style.textDetail}>Seat</Text>
+              {'  '}
+              {this.props.route.params.item.seat}
+            </Text>
+          </View>
+
           <Text numberOfLines={2} style={style.textName}>
-            {this.props.navigation.price}
+            {this.props.route.params.item.nameStore}
           </Text>
-          <Text style={style.textDetail}>dddddddddddddddddddddddd</Text>
+          <View style={style.rating}>{this._Rating(rating)}</View>
+          <Text style={style.textDetail}>
+            {this.props.route.params.item.location}
+          </Text>
+          <Text style={style.textDetail}>
+            {this.props.route.params.item.description}
+          </Text>
           <TouchableOpacity style={style.btnLogin}>
             <Text style={[style.btnTextForgot, {color: 'white'}]}>Order</Text>
           </TouchableOpacity>
@@ -72,6 +102,7 @@ var style = StyleSheet.create({
   footer: {
     flex: 1,
     paddingHorizontal: 40,
+    marginBottom: 10,
   },
   image_container: {
     width: height_image,
@@ -99,27 +130,22 @@ var style = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 50,
     paddingVertical: 3,
-    borderColor: 'red',
+    borderColor: 'green',
   },
   textPrice: {
     color: 'red',
     fontWeight: 'bold',
-    fontSize: 30,
-    marginTop: 20,
+    fontSize: 20,
+    marginTop: 10,
   },
   textName: {
     color: '#3e3c3e',
     fontWeight: 'bold',
     fontSize: 45,
-    marginTop: 35,
   },
   textDetail: {
     color: 'gray',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  btnTextForgot: {
-    fontWeight: 'bold',
+    marginLeft: 5,
   },
   btnLogin: {
     marginLeft: '25%',
@@ -128,10 +154,17 @@ var style = StyleSheet.create({
     borderRadius: 100,
     paddingVertical: 10,
     width: '60%',
+    marginTop: 10,
   },
   textOrder: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
   },
+  rating: {
+    marginTop: 5,
+    flexDirection: 'row',
+  },
 });
+
+export default DetailScreen;

@@ -20,21 +20,21 @@ import * as firebase from 'firebase';
 //   "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
 // },
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyBXYlNCr0Tm3DyVOLqmznL19ZKK8plm-NU',
-  authDomain: 'fir-vlfood.firebaseapp.com',
-  databaseURL: 'https://fir-vlfood.firebaseio.com',
-  projectId: 'fir-vlfood',
-  storageBucket: 'fir-vlfood.appspot.com',
-  messagingSenderId: '891528412755',
-  appId: '1:891528412755:web:318518e47634d98eb350a6',
-  measurementId: 'G-SV8NYGCGWZ',
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
 const rootRef = firebase.database().ref();
 const storesRef = rootRef.child('storesTable');
+var firebaseConfig = {
+  apiKey: 'AIzaSyAK2vpbOj6Gr1d40E2GT_ZzoraozESBEwE',
+  authDomain: 'vlfood-47ab6.firebaseapp.com',
+  databaseURL: 'https://vlfood-47ab6.firebaseio.com',
+  projectId: 'vlfood-47ab6',
+  storageBucket: 'vlfood-47ab6.appspot.com',
+  messagingSenderId: '782169738099',
+  appId: '1:782169738099:web:fca7305f583cb391919306',
+};
+// Initialize Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 export default class AddStoresScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +49,6 @@ export default class AddStoresScreen extends React.Component {
       price: '',
       catagory: '',
       loading: false,
-      errorMessage: null,
     };
     this._navigateTo = this._navigateTo.bind(this);
   }

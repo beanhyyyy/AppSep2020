@@ -1,34 +1,3 @@
-// import React from 'react';
-// import {View, StyleSheet} from 'react-native';
-// import HeaderTop from '../../HeaderTop';
-// export default class ViewStoresScreen extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this._navigateTo = this._navigateTo.bind(this);
-//   }
-//   _navigateTo(pageName) {
-//     this.props.navigation.navigate(pageName);
-//   }
-
-//   render() {
-//     return (
-//       <View style={style.container}>
-//         <HeaderTop title="View Stores" />
-//       </View>
-//     );
-//   }
-// }
-
-// var style = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: 'white',
-//     marginTop: 20,
-//     marginBottom: 5,
-//   },
-// });
-
 import {SafeAreaView} from 'react-native';
 import {Block, Button, TextView} from '../../../components';
 import {
@@ -49,21 +18,18 @@ const rootRef = firebase.database().ref();
 const storesRef = rootRef.child('storesTable');
 
 export default class ViewStoresScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      storesTable: [],
-      nameStore: '',
-      location: '',
-      seat: '',
-      description: '',
-      rating: '',
-      price: '',
-      catagory: '',
-      loading: false,
-    };
-    this._navigateTo = this._navigateTo.bind(this);
-  }
+  state = {
+    storesTable: [],
+    nameStore: '',
+    location: '',
+    seat: '',
+    description: '',
+    rating: '',
+    price: '',
+    catagory: '',
+    loading: false,
+  };
+  _navigateTo = this._navigateTo.bind(this);
 
   componentDidMount() {
     storesRef.on('value', (childSnapshot) => {
@@ -86,6 +52,7 @@ export default class ViewStoresScreen extends React.Component {
       });
     });
   }
+
   _navigateTo(pageName) {
     this.props.navigation.navigate(pageName);
   }
@@ -119,8 +86,8 @@ export default class ViewStoresScreen extends React.Component {
             <View style={style.content}>
               <TextView style={style.styleName}>{item.nameStore}</TextView>
               <TextView color="gray">By {item.location}</TextView>
-              <TextView color="gray">By {item.seat}</TextView>
-              <TextView color="gray">By {item.description}</TextView>
+              <TextView color="gray">{item.seat}</TextView>
+              <TextView color="gray">{item.description}</TextView>
               <View style={style.rating}>{this._Rating(item.rating)}</View>
               <View style={style.price_container}>
                 <View style={style.price}>
@@ -129,7 +96,27 @@ export default class ViewStoresScreen extends React.Component {
               </View>
             </View>
 
-            <Button style={style.button}>
+            <Button
+              style={style.button}
+              onPress={() =>
+                this.props.navigation.navigate(
+                  'DetailStores',
+                  {
+                    item: item,
+                  },
+                  alert(item.key),
+                )
+              }
+              // onPress={() =>
+              //   this._navigateTo('Detail', {
+              //     nameStore: item.nameStore,
+              //     location: item.location,
+              //     seat: item.seat,
+              //     description: item.description,
+              //     price: item.price,
+              //   })
+              // }
+            >
               <AntDesign name="arrowright" color="white" size={20} />
             </Button>
           </LinearGradient>
@@ -174,9 +161,12 @@ export default class ViewStoresScreen extends React.Component {
           <FlatList
             data={this.state.storesTable}
             renderItem={this.renderItem}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item, index) => item.key}
             ItemSeparatorComponent={this.ItemSeparatorComponent}
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
+            removeClippedSubviews
+            initialNumToRender={1}
+            maxToRenderPerBatch={1}
           />
         </View>
       </View>
