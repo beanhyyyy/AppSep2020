@@ -32,6 +32,9 @@ import ProfileScreen from './src/ProfileScreen';
 import SplashScreen from './src/SplashScreen';
 import SignUpScreen from './src/SignUpScreen';
 import todoListScreen from './src/todoListScreen';
+import OderScreen from './src/OderScreen';
+import ViewPartnerScreen from './src/ViewPartnerScreen';
+import DetailsPartnerScreen from './src/DetailsPartnerScreen';
 
 function CustomTab({state, descriptors, navigation}) {
   return (
@@ -92,6 +95,10 @@ function CustomTab({state, descriptors, navigation}) {
 
           if (route.name == 'Home') {
             return 'house-user';
+          }
+
+          if (route.name == 'ViewPartner') {
+            return 'list';
           }
         };
         return (
@@ -154,6 +161,7 @@ function MainTabPartner() {
       tabBarOptions={{}}
       tabBar={(props) => <CustomTab {...props} />}>
       <Tab.Screen name="Home" component={HomeSceen} />
+      <Tab.Screen name="ViewPartner" component={ViewPartnerScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
@@ -187,11 +195,18 @@ export default function App() {
           options={{}}
           component={MainTabPartner}
         />
+        <Stack.Screen name="ViewPartner" component={ViewPartnerScreen} />
+        <Stack.Screen
+          name="DetailsPartnerScreen"
+          component={DetailsPartnerScreen}
+        />
+
         <Stack.Screen name="MainTabUser" options={{}} component={MainTabUser} />
         <Stack.Screen name="ViewScreen" component={ViewScreen} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
         <Stack.Screen name="ContactScreen" component={ContactScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="OderScreen" component={OderScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

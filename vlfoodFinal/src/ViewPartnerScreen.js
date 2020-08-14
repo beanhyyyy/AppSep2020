@@ -13,7 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {firebase} from '../Setup';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-export default class ViewScreen extends React.Component {
+export default class ViewPartnerScreen extends React.Component {
   state = {
     storesTable: [],
     nameStore: '',
@@ -99,21 +99,10 @@ export default class ViewScreen extends React.Component {
                 </View>
               </View>
             </View>
-
             <Button
               style={style.button}
               onPress={() =>
-                this.props.navigation.navigate('OderScreen', {
-                  item: item,
-                })
-              }>
-              <FontAwesome5 name="shopping-cart" color="white" size={20} />
-            </Button>
-
-            <Button
-              style={style.button}
-              onPress={() =>
-                this.props.navigation.navigate('DetailsScreen', {
+                this.props.navigation.navigate('DetailsPartnerScreen', {
                   item: item,
                 })
               }>
@@ -254,3 +243,32 @@ const style = StyleSheet.create({
     marginTop: 5,
   },
 });
+
+// import React from 'react';
+// import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+
+// export default class ViewAdminScreen extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
+
+//   render() {
+//     return (
+//       <View style={style.container}>
+//         <Text>123</Text>
+//         <TouchableOpacity
+//           onPress={() => this.props.navigation.navigate('Login')}>
+//           <Text>Login</Text>
+//         </TouchableOpacity>
+//       </View>
+//     );
+//   }
+// }
+
+// const style = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     paddingVertical: 20,
+//     backgroundColor: '#fff',
+//   },
+// });

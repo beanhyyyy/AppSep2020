@@ -19,10 +19,12 @@ export default class AddAdminScreen extends React.Component {
       storesTable: [],
       nameStore: '',
       location: '',
+      image: '',
       seat: '',
       description: '',
       rating: '',
       price: '',
+      listOrder: [],
       loading: false,
     };
     this._navigateTo = this._navigateTo.bind(this);
@@ -34,12 +36,15 @@ export default class AddAdminScreen extends React.Component {
   componentDidMount() {}
 
   onPressAdd = () => {
-    const {nameStore, location, description, rating, price} = this.state;
+    const {nameStore, image, location, description, rating, price} = this.state;
     if (this.state.nameStore === '') {
       alert('Name Stores is blank');
       return;
     } else if (this.state.location === '') {
       alert('Location Stores is blank');
+      return;
+    } else if (this.state.image === '') {
+      alert('Image Stores is blank');
       return;
     } else if (this.state.seat === '') {
       alert('Seat Stores is blank');
@@ -61,10 +66,12 @@ export default class AddAdminScreen extends React.Component {
           {
             nameStore: this.state.nameStore,
             location: this.state.location,
+            image: this.state.image,
             seat: parseInt(this.state.seat) | 0,
             description: this.state.description,
             rating: parseInt(this.state.rating) | 0,
             price: this.state.price,
+            listOrder: this.state.listOrder,
           },
           alert('Successful'),
         );
@@ -97,6 +104,17 @@ export default class AddAdminScreen extends React.Component {
                   onChangeText={(location) => this.setState({location})}
                   value={this.state.location}
                   placeholder={'location'}
+                />
+              </View>
+
+              <View style={{marginTop: 30}}>
+                <Text style={style.inputTitle}>Image Link</Text>
+                <TextInput
+                  style={style.input}
+                  autoCapitalize="none"
+                  onChangeText={(image) => this.setState({image})}
+                  value={this.state.image}
+                  placeholder={'link'}
                 />
               </View>
 

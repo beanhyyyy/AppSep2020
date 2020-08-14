@@ -18,6 +18,7 @@ class EditAdminScreen extends Component {
   state = {
     nameStore: '',
     location: '',
+    image: '',
     seat: '',
     description: '',
     rating: '',
@@ -31,6 +32,7 @@ class EditAdminScreen extends Component {
     this.state = {
       nameStore: '' + item.nameStore,
       location: '' + item.location,
+      image: '' + item.image,
       seat: '' + item.seat,
       description: '' + item.description,
       rating: '' + item.rating,
@@ -55,12 +57,23 @@ class EditAdminScreen extends Component {
     }
   };
   onPressEdit = () => {
-    const {nameStore, location, description, rating, price} = this.state;
+    const {
+      nameStore,
+      location,
+      image,
+      description,
+      rating,
+      price,
+      seat,
+    } = this.state;
     if (this.state.nameStore === '') {
       alert('Name Stores is blank');
       return;
     } else if (this.state.location === '') {
       alert('Location Stores is blank');
+      return;
+    } else if (this.state.image === '') {
+      alert('Image Stores is blank');
       return;
     } else if (this.state.seat === '') {
       alert('Seat Stores is blank');
@@ -74,6 +87,9 @@ class EditAdminScreen extends Component {
     } else if (this.state.price === '') {
       alert('Price Stores is blank');
       return;
+    } else if (this.state.seat === '') {
+      alert('Price Stores is blank');
+      return;
     } else {
       firebase
         .database()
@@ -82,6 +98,7 @@ class EditAdminScreen extends Component {
           {
             nameStore: this.state.nameStore,
             location: this.state.location,
+            image: this.state.image,
             seat: parseInt(this.state.seat) | 0,
             description: this.state.description,
             rating: parseInt(this.state.rating) | 0,
@@ -130,7 +147,16 @@ class EditAdminScreen extends Component {
                   placeholder={'location'}
                 />
               </View>
-
+              <View style={{marginTop: 30}}>
+                <Text style={style.inputTitle}>Image Link</Text>
+                <TextInput
+                  style={style.input}
+                  autoCapitalize="none"
+                  onChangeText={(image) => this.setState({image})}
+                  value={this.state.image}
+                  placeholder={'link'}
+                />
+              </View>
               <View style={{marginTop: 30}}>
                 <Text style={style.inputTitle}>Description</Text>
                 <TextInput

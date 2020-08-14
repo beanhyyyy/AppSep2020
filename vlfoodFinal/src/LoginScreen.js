@@ -7,8 +7,15 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
+  Image,
 } from 'react-native';
-import Button from './ButtonLogin';
+
+// import {GoogleSignin} from '@react-native-community/google-signin';
+
+// GoogleSignin.configure({
+//   webClientId:
+//     '400214112291-t0u484fg2nptcksojdscju0ui3f6q5il.apps.googleusercontent.com',
+// });
 
 export default class LoginScreen extends React.Component {
   constructor(props) {
@@ -23,6 +30,20 @@ export default class LoginScreen extends React.Component {
     };
   }
 
+  // onGoogleButtonPress = async () => {
+  //   // Get the users ID token
+  //   await GoogleSignin.hasPlayServices();
+  //   const {idToken} = await GoogleSignin.signIn();
+
+  //   // Create a Google credential with the token
+  //   const googleCredential = firebase.auth.GoogleAuthProvider.credential(
+  //     idToken,
+  //   );
+
+  //   // Sign-in the user with the credential
+  //   return firebase.auth.signInWithCredential(googleCredential);
+  // };
+
   _navigateTo(pageName) {
     this.props.navigation.navigate(pageName);
   }
@@ -35,7 +56,7 @@ export default class LoginScreen extends React.Component {
         .signInWithEmailAndPassword(email, password)
         .then(() => this._navigateTo('MainTabAdmin'))
         .catch((erro) => this.setState({errorMessage: erro.message}));
-    } else if (this.state.email.indexOf('partner', 0)) {
+    } else if (this.state.email.indexOf('partner', 1) == -1) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -93,52 +114,55 @@ export default class LoginScreen extends React.Component {
           </TouchableOpacity>
           <Text style={style.inputTitleOr}>or</Text>
           <View style={style.ggBtn}>
-            {/* <TouchableOpacity
-            style={[
-              style.btnLogin,
-              {
-                flex: 1,
-                backgroundColor: 'white',
-                borderWidth: 1,
-                borderColor: 'gray',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                marginRight: 10,
-              },
-            ]}>
-            <Image
-              style={{width: 20, height: 20}}
-              source={require('../../assets/googleIcon.png')}
-            />
-            <Text style={style.btnTextForgot}>Google</Text>
-          </TouchableOpacity> */}
-            <Button title="Google" icon={require('./assets/googleIcon.png')} />
-            <Button
-              title="Facebook"
-              icon={require('./assets/fbIcon.png')}
-              color={'#4a6ea8'}
-              textColor={'#fff'}
-            />
-            {/* <TouchableOpacity
-            style={[
-              style.btnLogin,
-              {
-                flex: 1,
-                backgroundColor: '#4a6ea8',
-                borderWidth: 1,
-                borderColor: 'gray',
-                flexDirection: 'row',
-                justifyContent: 'center',
-              },
-            ]}>
-            <Image
-              style={{width: 20, height: 20}}
-              source={require('../../assets/fbIcon.png')}
-            />
-            <Text style={[style.btnTextForgot, {color: 'white'}]}>
-              Facebook
-            </Text>
-          </TouchableOpacity> */}
+            <TouchableOpacity
+              // onPress={() =>
+              //   this.onGoogleButtonPress().then(() =>
+              //     console.log('Signed in with Google!'),
+              //   )
+              // }
+              style={[
+                style.btnLogin,
+                {
+                  flex: 1,
+                  backgroundColor: 'white',
+                  borderWidth: 1,
+                  borderColor: 'gray',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  marginRight: 10,
+                },
+              ]}>
+              <Image
+                style={{width: 20, height: 20}}
+                source={require('./assets/googleIcon.png')}
+              />
+              <Text style={style.btnTextForgot}>Google</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              // onPress={() =>
+              //   this.onFacebookButtonPress().then(() =>
+              //     console.log('Signed in with Facebook!'),
+              //   )
+              // }
+              style={[
+                style.btnLogin,
+                {
+                  flex: 1,
+                  backgroundColor: '#4a6ea8',
+                  borderWidth: 1,
+                  borderColor: 'gray',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                },
+              ]}>
+              <Image
+                style={{width: 20, height: 20}}
+                source={require('./assets/fbIcon.png')}
+              />
+              <Text style={[style.btnTextForgot, {color: 'white'}]}>
+                Facebook
+              </Text>
+            </TouchableOpacity>
           </View>
           <View
             style={{

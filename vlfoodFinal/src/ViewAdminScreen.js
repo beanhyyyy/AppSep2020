@@ -18,11 +18,13 @@ export default class ViewAdminScreen extends React.Component {
     storesTable: [],
     nameStore: '',
     location: '',
+    image: '',
     seat: '',
     description: '',
     rating: '',
     price: '',
     catagory: '',
+    listOrder: '',
     loading: false,
   };
   _navigateTo = this._navigateTo.bind(this);
@@ -39,10 +41,12 @@ export default class ViewAdminScreen extends React.Component {
             key: doc.key,
             nameStore: doc.toJSON().nameStore,
             location: doc.toJSON().location,
+            image: doc.toJSON().image,
             seat: doc.toJSON().seat,
             description: doc.toJSON().description,
             rating: doc.toJSON().rating,
             price: doc.toJSON().price,
+            listOrder: doc.toJSON().listOrder,
           });
           this.setState({
             storesTable: storesTable,
@@ -80,9 +84,9 @@ export default class ViewAdminScreen extends React.Component {
             start={{x: 0, y: 1}}
             end={{x: 1, y: 0}}
             style={style.item}>
-            {/* <View style={style.image_container}>
-                  <Image source={{uri: item.image}} style={style.image} />
-                </View> */}
+            <View style={style.image_container}>
+              <Image source={{uri: item.image}} style={style.image} />
+            </View>
             <View style={style.content}>
               <TextView style={style.styleName}>{item.nameStore}</TextView>
               <TextView color="gray">By {item.location}</TextView>
@@ -137,6 +141,12 @@ export default class ViewAdminScreen extends React.Component {
     let storesTable = [];
     this.state.data_temp.map(function (value) {
       if (value.nameStore.indexOf(text) > -1) {
+        storesTable.push(value);
+      } else if (value.location.indexOf(text) > -1) {
+        storesTable.push(value);
+      } else if (value.description.indexOf(text) > -1) {
+        storesTable.push(value);
+      } else if (value.price.indexOf(text) > -1) {
         storesTable.push(value);
       }
     });

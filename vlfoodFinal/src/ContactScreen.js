@@ -51,7 +51,7 @@ export default class ContactScreen extends React.Component {
   render() {
     return (
       <View style={style.container}>
-        <HeaderTop title="ContactScreen" />
+        <HeaderTop title="Admin" />
         <View>
           <FlatList
             data={this.state.data}
@@ -71,8 +71,8 @@ var style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    marginTop: 20,
     marginBottom: 5,
-    marginLeft: -8,
   },
   item: {
     flex: 1,

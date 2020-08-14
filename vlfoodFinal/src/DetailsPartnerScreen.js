@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-class DetailsScreen extends Component {
+class DetailsPartnerScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -96,6 +96,9 @@ class DetailsScreen extends Component {
           </Text>
           <Text style={style.textDetail}>
             {this.props.route.params.item.description}
+          </Text>
+          <Text numberOfLines={6} style={style.textDetail}>
+            {this.props.route.params.item.listOrder}
           </Text>
           {/* <TouchableOpacity
             style={style.btnLogin}
@@ -186,4 +189,4 @@ var style = StyleSheet.create({
   },
 });
 
-export default DetailsScreen;
+export default DetailsPartnerScreen;
