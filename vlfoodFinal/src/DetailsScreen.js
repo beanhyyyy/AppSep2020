@@ -48,7 +48,7 @@ class DetailsScreen extends Component {
       <View style={style.container}>
         <StatusBar barStyle="light-content" />
         <ImageBackground
-          source={require('../src/assets/header_detail.png')}
+          source={require('../src/assets/header_detail.jpg')}
           style={{flex: 1, alignItems: 'center'}}
           resizeMode={'stretch'}>
           <View style={style.image_container}>

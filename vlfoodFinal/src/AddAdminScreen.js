@@ -290,7 +290,7 @@ var style = StyleSheet.create({
 //     for (let i = 0; i < item; i++) {
 //       rating.push(
 //         <Image
-//           source={require('./assets/star.png')}
+//           source={require('./assets/star.jpg')}
 //           style={{width: 15, height: 15, marginRight: 3}}
 //           resizeMode="cover"
 //         />,

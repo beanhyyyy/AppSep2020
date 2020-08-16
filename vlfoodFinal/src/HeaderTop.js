@@ -6,7 +6,7 @@ const HeaderTop = ({title}) => {
   return (
     <Block>
       <ImageBackground
-        source={require('./assets/header.png')}
+        source={require('./assets/header.jpg')}
         style={style.img}
         resizeMode="contain">
         <TextView style={style.styleTitle}>{title}</TextView>

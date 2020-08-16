@@ -56,7 +56,7 @@ export default class LoginScreen extends React.Component {
         .signInWithEmailAndPassword(email, password)
         .then(() => this._navigateTo('MainTabAdmin'))
         .catch((erro) => this.setState({errorMessage: erro.message}));
-    } else if (this.state.email.indexOf('partner', 1) == -1) {
+    } else if (this.state.email.toString().indexOf('partner', 0) == 0) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -71,6 +71,7 @@ export default class LoginScreen extends React.Component {
     }
   };
   render() {
+    console.log(this.state.email.toString().indexOf('partner', 0));
     return (
       <SafeAreaView style={style.container}>
         <View style={style.wrapper}>

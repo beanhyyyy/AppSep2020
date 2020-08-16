@@ -71,8 +71,8 @@ var style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    marginTop: 20,
     marginBottom: 5,
+    marginLeft: -9,
   },
   item: {
     flex: 1,

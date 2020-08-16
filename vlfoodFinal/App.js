@@ -35,6 +35,8 @@ import todoListScreen from './src/todoListScreen';
 import OderScreen from './src/OderScreen';
 import ViewPartnerScreen from './src/ViewPartnerScreen';
 import DetailsPartnerScreen from './src/DetailsPartnerScreen';
+import ChatScreen from './src/ChatScreen';
+import MessengerScreen from './src/MessengerScreen';
 
 function CustomTab({state, descriptors, navigation}) {
   return (
@@ -85,10 +87,6 @@ function CustomTab({state, descriptors, navigation}) {
             return 'user-alt';
           }
 
-          if (route.name == 'ListAll') {
-            return 'shopping-cart';
-          }
-
           if (route.name == 'Contact') {
             return 'users';
           }
@@ -97,8 +95,12 @@ function CustomTab({state, descriptors, navigation}) {
             return 'house-user';
           }
 
-          if (route.name == 'ViewPartner') {
+          if (route.name == 'List') {
             return 'list';
+          }
+
+          if (route.name == 'Chat') {
+            return 'facebook-messenger';
           }
         };
         return (
@@ -137,6 +139,7 @@ function MainTabUser() {
       tabBarOptions={{}}
       tabBar={(props) => <CustomTab {...props} />}>
       <Tab.Screen name="Home" component={HomeSceen} />
+      <Tab.Screen name="Chat" component={ChatScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
@@ -149,6 +152,7 @@ function MainTabAdmin() {
       tabBarOptions={{}}
       tabBar={(props) => <CustomTab {...props} />}>
       <Tab.Screen name="HomeAdmin" component={HomeAdminScreen} />
+      <Tab.Screen name="Chat" component={ChatScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
@@ -161,7 +165,8 @@ function MainTabPartner() {
       tabBarOptions={{}}
       tabBar={(props) => <CustomTab {...props} />}>
       <Tab.Screen name="Home" component={HomeSceen} />
-      <Tab.Screen name="ViewPartner" component={ViewPartnerScreen} />
+      <Tab.Screen name="List" component={ViewPartnerScreen} />
+      <Tab.Screen name="Chat" component={ChatScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
@@ -195,7 +200,7 @@ export default function App() {
           options={{}}
           component={MainTabPartner}
         />
-        <Stack.Screen name="ViewPartner" component={ViewPartnerScreen} />
+        <Stack.Screen name="List" component={ViewPartnerScreen} />
         <Stack.Screen
           name="DetailsPartnerScreen"
           component={DetailsPartnerScreen}
@@ -204,9 +209,12 @@ export default function App() {
         <Stack.Screen name="MainTabUser" options={{}} component={MainTabUser} />
         <Stack.Screen name="ViewScreen" component={ViewScreen} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+        <Stack.Screen name="OderScreen" component={OderScreen} />
+
         <Stack.Screen name="ContactScreen" component={ContactScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-        <Stack.Screen name="OderScreen" component={OderScreen} />
+        <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="MessengerScreen" component={MessengerScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
