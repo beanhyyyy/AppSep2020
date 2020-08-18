@@ -37,6 +37,7 @@ class OderScreen extends Component {
 
   onPressOrder = () => {
     const {seat, seatOrder, listOrder} = this.state;
+    var seatFinal = parseInt(this.state.seat) - parseInt(this.state.seatOrder);
     if (this.state.seat === '') {
       alert('Seat Stores is blank');
       return;
@@ -46,9 +47,9 @@ class OderScreen extends Component {
     } else if (this.state.listOrder === '') {
       alert('Seat Stores is blank');
       return;
+    } else if (parseInt(this.state.seat) < parseInt(this.state.seatOrder)) {
+      alert('Seat Your Order fail');
     } else {
-      var seatFinal =
-        parseInt(this.state.seat) - parseInt(this.state.seatOrder);
       var listOrderFinal = this.state.listOrder.concat(
         this.state.listOrderFill + ',',
       );
